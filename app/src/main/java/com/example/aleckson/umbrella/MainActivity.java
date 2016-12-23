@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        weatherViewModel = new WeatherViewModel(new WeatherImpl(), AndroidSchedulers.mainThread());
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -47,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        weatherViewModel = new WeatherViewModel(new WeatherImpl(), AndroidSchedulers.mainThread());
     }
 
     @Override
@@ -67,21 +67,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void performSearch(){
-        subscriptions.add(weatherViewModel.getWeather("55428")
+        subscriptions.add(weatherViewModel.getWeather("55376")
         .subscribe(new Observer<WeatherResults>() {
             @Override
             public void onCompleted() {
+                Log.v(TAG, "Received network data successfully");
 
             }
 
             @Override
             public void onError(Throwable e) {
-
+                Log.v(TAG, "Error receiving network data" + e);
             }
 
             @Override
             public void onNext(WeatherResults weatherResults) {
                 //updateUi
+                Log.v(TAG, "It's" + weatherResults.currentObservation.getTempFahrenheit() + "in Elk river" );
 
             }
         }));

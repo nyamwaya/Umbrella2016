@@ -7,6 +7,8 @@ import rx.Observable;
 /**
  * Created by Aleckson on 12/22/2016.
  *
+ * provide a method to access to the Weather Underground API call.
+ *
  */
 
 public interface WeatherInteractor {

@@ -9,10 +9,10 @@ import rx.Observable;
 /**
  * Created by Aleckson on 12/22/2016.
  *
- * Retrofit interface meant to define the api endpoint
+ * Retrofit interface
  */
 
 public interface WeatherService {
-    @GET("/9375b1bed0c9c10b/conditions/hourly/q/{zipCode}.json")
+    @GET("9375b1bed0c9c10b/conditions/hourly/q/{zipCode}.json")
     Observable<WeatherResults> fetchWeather(@Path("zipCode") String zipCode);
 }

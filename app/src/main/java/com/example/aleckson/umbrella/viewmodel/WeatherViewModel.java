@@ -8,8 +8,9 @@ import rx.Scheduler;
 
 /**
  * Created by Aleckson on 12/22/2016.
- * 
- * This ViewModel needs two parameters: The WeatherAPI and the Main Thread scheduler.
+ *
+ * The job of this View Holder is to make sure that we are using the right thread.
+ * It needs two parameters: The WeatherAPI and the Main Thread scheduler.
  *
  * If you are formatting data, this is the place to do it, you can
  * use RxJava map methods to transform one object to another
@@ -26,7 +27,10 @@ public class WeatherViewModel {
         this.scheduler = scheduler;
     }
 
-    //Make sure that we are using the right thread.
+    /**
+     *  Calling to the Interactor fetch weather method,
+     *  making sure that the events are observed in the correct thread.
+     */
     public Observable<WeatherResults> getWeather(String zipcode) {
         return interactor.fetchWeather(zipcode).observeOn(scheduler);
     }

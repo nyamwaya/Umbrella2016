@@ -26,7 +26,7 @@ public class WeatherImpl implements WeatherInteractor {
         // Configure Retrofit
         Retrofit retrofit = new Retrofit.Builder()
                 // Base URL can change for endpoints (dev, staging, live..)
-                .baseUrl("http://api.wunderground.com/api")
+                .baseUrl("http://api.wunderground.com/api/")
                 // Takes care of converting the JSON response into java objects
                 .addConverterFactory(GsonConverterFactory.create())
                 // Retrofit Call to RxJava Observable
