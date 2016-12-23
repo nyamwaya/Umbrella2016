@@ -23,6 +23,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     //Retrofit 2
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    //Gson converter factory
+    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
     //rxandroid is a library that adds the necessary Android specific requirements for RxJava
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     //adapter-rxjava is a library that allows you to use RxJava with Retrofit
