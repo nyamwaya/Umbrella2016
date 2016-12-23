@@ -1,11 +1,10 @@
 package com.example.aleckson.umbrella.viewmodel;
 
-import com.example.aleckson.umbrella.networking.WeatherApi;
+import com.example.aleckson.umbrella.networking.WeatherInteractor;
 import com.example.aleckson.umbrella.networking.model.WeatherResults;
 
 import rx.Observable;
 import rx.Scheduler;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by Aleckson on 12/22/2016.
@@ -19,16 +18,16 @@ import rx.schedulers.Schedulers;
 
 public class WeatherViewModel {
 
-    private WeatherApi api;
+    private WeatherInteractor interactor;
     private Scheduler scheduler;
 
-    public WeatherViewModel(WeatherApi api, Scheduler scheduler) {
-        this.api = api;
+    public WeatherViewModel(WeatherInteractor interactor, Scheduler scheduler) {
+        this.interactor = interactor;
         this.scheduler = scheduler;
     }
 
     //Make sure that we are using the right thread.
     public Observable<WeatherResults> getWeather(String zipcode) {
-        return api.getWeather(zipcode).observeOn(scheduler);
+        return interactor.fetchWeather(zipcode).observeOn(scheduler);
     }
 }
