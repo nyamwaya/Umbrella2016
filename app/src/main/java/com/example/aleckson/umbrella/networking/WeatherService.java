@@ -8,12 +8,12 @@ import com.example.aleckson.umbrella.networking.model.WeatherResults;
 import rx.Observable;
 
 /**
- * Created by kerub on 12/22/2016.
+ * Created by Aleckson on 12/22/2016.
  */
 
 public class WeatherService {
 
-    public Observable<WeatherResults> getWeather(int zipcode){
+    public Observable<WeatherResults> getWeather(String zipcode){
         WeatherClient mWeatherClient = new WeatherClient();
         return mWeatherClient.getWeather(zipcode);
     }

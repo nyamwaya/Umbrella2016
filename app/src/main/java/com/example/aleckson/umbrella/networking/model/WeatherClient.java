@@ -36,7 +36,7 @@ public class WeatherClient implements WeatherApi {
     }
 
     @Override
-    public Observable<WeatherResults> getWeather(@Path("zip") int zipCode) {
+    public Observable<WeatherResults> getWeather(@Path("zip") String zipCode) {
         //network calls should me made in the I/O thread
         return service.getWeather(zipCode).subscribeOn(Schedulers.io());
     }

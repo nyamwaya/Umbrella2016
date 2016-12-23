@@ -16,5 +16,5 @@ import rx.Observable;
  */
 
 public interface WeatherApi {
-    Observable<WeatherResults> getWeather(@Path("zip") int zipCode);
+    Observable<WeatherResults> getWeather(@Path("zip") String zipCode);
 }
