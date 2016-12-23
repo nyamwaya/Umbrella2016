@@ -9,7 +9,7 @@ import rx.Observable;
  * Created by kerub on 12/22/2016.
  */
 
-public class WeatherService implements WeatherApi {
+public class WeatherClient implements WeatherApi {
 
     @Override
     public Observable<WeatherResults> getWeather(@Path("zip") int zipCode) {
