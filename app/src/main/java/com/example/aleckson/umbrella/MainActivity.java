@@ -4,16 +4,20 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.WindowCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.aleckson.umbrella.networking.model.CurrentObservation;
 import com.example.aleckson.umbrella.networking.model.WeatherImpl;
 import com.example.aleckson.umbrella.networking.model.WeatherResults;
 import com.example.aleckson.umbrella.viewmodel.WeatherViewModel;
@@ -29,15 +33,35 @@ public class MainActivity extends AppCompatActivity {
     private CompositeSubscription subscriptions = new CompositeSubscription();
     private WeatherViewModel weatherViewModel;
 
+    private TextView mTemperature;
+    private TextView mWeatheer;
+
+    private CollapsingToolbarLayout collapsingToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        rendderLayout();
 
         weatherViewModel = new WeatherViewModel(new WeatherImpl(), AndroidSchedulers.mainThread());
+
+
+    }
+
+    private void rendderLayout(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+        supportRequestWindowFeature(WindowCompat.FEATURE_ACTION_BAR);
+        collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+
+        mTemperature = (TextView) findViewById(R.id.temp);
+        mWeatheer = (TextView) findViewById(R.id.weather);
+
+
     }
 
     @Override
@@ -68,16 +92,32 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(Throwable e) {
-                Log.v(TAG, "Error receiving network data" + e);
+                Log.v(TAG, "Error receivingIts network data" + e);
             }
 
             @Override
             public void onNext(WeatherResults weatherResults) {
                 //updateUi
-                Log.v(TAG, "It's" + weatherResults.currentObservation.getTempFahrenheit() + "in Elk river" );
+                Log.v(TAG, "It's" + weatherResults.currentObservation.getTempFahrenheit() + "in"
+                + weatherResults.currentObservation.getDisplayLocation().getFull());
+
+                updateUi(weatherResults.currentObservation);
 
             }
         }));
+
+    }
+
+    private void updateUi(CurrentObservation currentObservation) {
+
+        collapsingToolbar.setTitle(currentObservation.getDisplayLocation().getFull());
+        collapsingToolbar.setCollapsedTitleTextAppearance(R.style.collapsedToolBar);
+        collapsingToolbar.setExpandedTitleTextAppearance(R.style.expandedToolBar);
+
+
+
+        mTemperature.setText(String.valueOf(currentObservation.getTempCelsius()));
+        mWeatheer.setText(currentObservation.getWeather());
 
     }
 
