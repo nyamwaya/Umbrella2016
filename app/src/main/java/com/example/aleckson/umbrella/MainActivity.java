@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             mWeatheer.setText(currentObservation.getWeather());
 
 
-/*
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 window.setStatusBarColor(getResources().getColor(R.color.weather_coolDark));
 
             }
-        }*/
+        }
 
     }
 
