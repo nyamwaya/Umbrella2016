@@ -53,11 +53,11 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="@android:color/white"
-                    android:textSize="48sp"
+                    android:textSize="36sp"
                     tools:text="89"
                     android:layout_below="@+id/weather"
                     android:layout_centerHorizontal="true"
-                 />
+                     />
 
             </RelativeLayout>
 
