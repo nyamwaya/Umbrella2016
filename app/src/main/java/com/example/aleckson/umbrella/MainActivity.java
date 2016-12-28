@@ -1,12 +1,16 @@
 package com.example.aleckson.umbrella;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.WindowCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +18,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mTemperature;
     private TextView mWeatheer;
+    private Toolbar toolbar;
 
     private CollapsingToolbarLayout collapsingToolbar;
 
@@ -50,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void rendderLayout(){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+         toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         supportRequestWindowFeature(WindowCompat.FEATURE_ACTION_BAR);
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
@@ -115,11 +122,58 @@ public class MainActivity extends AppCompatActivity {
         collapsingToolbar.setExpandedTitleTextAppearance(R.style.expandedToolBar);
 
 
+        int temp;
+        int basetemp = 60;
+        boolean metricMode = false;
 
-        mTemperature.setText(String.valueOf(currentObservation.getTempCelsius()));
-        mWeatheer.setText(currentObservation.getWeather());
+        if (metricMode) {
+            basetemp = ((5 * (60 - 32)) / (9));
+            Log.v(TAG, "basetemp metric: " + basetemp);
+            temp = Math.round(currentObservation.getTempCelsius());
+        } else {
+            temp = Math.round(currentObservation.getTempFahrenheit());
+        }
+
+        String temperatureDegrees = String.valueOf(temp) + (char) 0x00B0;
+
+
+/*        if (temp > basetemp){
+            collapsingToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weather_warm));
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weather_warm));
+
+
+        }else {
+            collapsingToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weather_cool));
+            toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weather_cool));
+
+        }*/
+            mTemperature.setText(temperatureDegrees);
+            mWeatheer.setText(currentObservation.getWeather());
+
+
+/*
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLUE);
+
+            if (temp > basetemp) {
+                toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weather_warm));
+                collapsingToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weather_warm));
+                window.setStatusBarColor(getResources().getColor(R.color.weather_warmDark));
+
+
+            } else {
+                toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weather_cool));
+                collapsingToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weather_cool));
+                window.setStatusBarColor(getResources().getColor(R.color.weather_coolDark));
+
+            }
+        }*/
 
     }
+
+
 
     private boolean isInternetConnectionAvailable() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

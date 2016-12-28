@@ -7,10 +7,7 @@
     android:fitsSystemWindows="true"
     tools:context="com.example.aleckson.umbrella.MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
@@ -52,11 +49,11 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textColor="@android:color/white"
-                    android:textSize="36sp"
+                    android:textSize="48sp"
                     tools:text="89"
                     android:layout_below="@+id/weather"
                     android:layout_centerHorizontal="true"
-                    />
+                    android:layout_marginTop="-16dp" />
 
             </RelativeLayout>
 
@@ -68,5 +65,8 @@
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 </android.support.design.widget.CoordinatorLayout>
