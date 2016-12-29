@@ -4,15 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="com.example.aleckson.umbrella.MainActivity">
-
-
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
+        android:layout_height="@dimen/backdrop_height"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:fitsSystemWindows="true">
 
@@ -21,10 +18,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:expandedTitleMarginEnd="64dp"
+            app:expandedTitleGravity="bottom|center_horizontal"
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
             android:fitsSystemWindows="true">
-
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -34,45 +32,21 @@
                 app:popupTheme="@style/Theme.AppCompat.Light.NoActionBar"
                 app:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/backdrop_height"
-                android:orientation="vertical"
-                app:layout_collapseMode="parallax"
-                android:padding="16dp"
-                tools:background="@color/colorPrimary">
-
-
-                <TextView
-                    android:id="@+id/weather"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:gravity="start"
-                    android:textColor="@android:color/white"
-                    android:textSize="24sp"
-                    tools:text="Clear" />
-
-                <TextView
-                    android:id="@+id/temp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@android:color/white"
-                    android:textSize="48sp"
-                    tools:text="89"
-                    android:layout_below="@+id/weather"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="-16dp" />
-
-            </RelativeLayout>
+            <include
+                layout="@layout/weather_conditions"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax" />
 
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
+
+
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 </android.support.design.widget.CoordinatorLayout>

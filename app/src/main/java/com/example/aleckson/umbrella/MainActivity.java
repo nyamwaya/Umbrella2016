@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
             collapsingToolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weather_cool));
             toolbar.setBackgroundColor(ContextCompat.getColor(this, R.color.weather_cool));
 
+'
         }*/
             mTemperature.setText(temperatureDegrees);
             mWeatheer.setText(currentObservation.getWeather());
