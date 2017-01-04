@@ -1,6 +1,6 @@
-package com.example.aleckson.umbrella.networking;
+package com.example.aleckson.umbrella.network;
 
-import com.example.aleckson.umbrella.networking.model.WeatherResults;
+import com.example.aleckson.umbrella.model.WeatherResults;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;

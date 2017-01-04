@@ -1,12 +1,10 @@
-package com.example.aleckson.umbrella.networking.model;
+package com.example.aleckson.umbrella.network;
 
-import com.example.aleckson.umbrella.networking.WeatherInteractor;
-import com.example.aleckson.umbrella.networking.WeatherService;
+import com.example.aleckson.umbrella.model.WeatherResults;
 
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Path;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 
@@ -16,12 +14,12 @@ import rx.schedulers.Schedulers;
  * This class is a model in MVVM pattern
  */
 
-public class WeatherImpl implements WeatherInteractor {
+public class WeatherClient {
 
     private WeatherService service;
 
     //Retrofit implementation
-    public WeatherImpl() {
+    public WeatherClient() {
 
         // Configure Retrofit
         Retrofit retrofit = new Retrofit.Builder()
@@ -37,7 +35,7 @@ public class WeatherImpl implements WeatherInteractor {
     }
 
 
-    @Override
+
     public Observable<WeatherResults> fetchWeather(String zipcode) {
         return service.fetchWeather(zipcode).subscribeOn(Schedulers.io());
     }

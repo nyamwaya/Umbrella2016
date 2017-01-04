@@ -1,4 +1,4 @@
-package com.example.aleckson.umbrella.networking.model;
+package com.example.aleckson.umbrella.model;
 
 import java.util.Date;
 

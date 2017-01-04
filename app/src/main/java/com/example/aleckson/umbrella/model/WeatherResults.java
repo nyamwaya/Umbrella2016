@@ -1,8 +1,11 @@
-package com.example.aleckson.umbrella.networking.model;
+package com.example.aleckson.umbrella.model;
 
+import com.example.aleckson.umbrella.network.WeatherClient;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+
+import rx.Observable;
 
 /**
  *
@@ -20,4 +23,9 @@ public class WeatherResults {
 
     @SerializedName("hourly_forecast")
     public List<ForecastCondition> forecast;
+
+    public static Observable<WeatherResults> fetchWeather(String zipcode){
+        WeatherClient client = new WeatherClient();
+        return client.fetchWeather(zipcode);
+    }
 }

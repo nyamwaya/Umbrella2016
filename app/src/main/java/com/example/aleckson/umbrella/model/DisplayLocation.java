@@ -1,4 +1,4 @@
-package com.example.aleckson.umbrella.networking.model;
+package com.example.aleckson.umbrella.model;
 
 /**
  * Created by Aleckson on 12/23/2016.
