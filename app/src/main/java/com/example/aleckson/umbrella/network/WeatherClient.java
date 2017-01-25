@@ -37,6 +37,6 @@ public class WeatherClient {
 
 
     public Observable<WeatherResults> fetchWeather(String zipcode) {
-        return service.fetchWeather(zipcode).subscribeOn(Schedulers.io());
+        return service.getCurrentConditions(zipcode).subscribeOn(Schedulers.io());
     }
 }
