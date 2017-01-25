@@ -3,6 +3,7 @@ package com.example.aleckson.umbrella.viewmodel;
 import android.util.Log;
 
 import com.example.aleckson.umbrella.IWeather;
+import com.example.aleckson.umbrella.model.CurrentObservation;
 import com.example.aleckson.umbrella.model.WeatherResults;
 
 import rx.Observer;
@@ -23,6 +24,7 @@ public class WeatherViewModel {
     private static final String TAG = WeatherViewModel.class.getSimpleName();
     private IWeather iWeather;
     private boolean metricMode = false;
+    private String mUserZipCode = "55428";
 
     public WeatherViewModel(IWeather iWeather) {
         this.iWeather = iWeather;
@@ -30,11 +32,35 @@ public class WeatherViewModel {
     }
 
     public void onResume() {
-        getWeather("55376");
+       fetchCurrentConditions(mUserZipCode);
     }
 
-    private void getWeather(String zipcode) {
-        WeatherResults.fetchWeather(zipcode)
+    //Responsible for requesting current conditions data
+    private void fetchCurrentConditions(String zipcode){
+        CurrentObservation.fetchCurrentObseervations(zipcode)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<CurrentObservation>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(CurrentObservation currentObservation) {
+
+                    }
+                });
+
+    }
+
+    //Responsible for requesting 10 day hourly forecast
+    private void fetchTenDayHourly(String zipcode){
+        WeatherResults.fetchTenDayHourly(zipcode)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<WeatherResults>() {
                     @Override
@@ -44,27 +70,17 @@ public class WeatherViewModel {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.v(TAG, "Error fetching weather" + e);
+
                     }
 
                     @Override
                     public void onNext(WeatherResults weatherResults) {
-                        if (weatherResults !=null){
-                            Log.v(TAG, "It's" + weatherResults.currentObservation.getTempFahrenheit() + "in"
-                                    + weatherResults.currentObservation.getDisplayLocation().getFull());
-
-
-                            calculateTemp(weatherResults.currentObservation.getTempFahrenheit(),
-                                    weatherResults.currentObservation.getTempCelsius());
-
-                            iWeather.setWeather(weatherResults.currentObservation.getWeather());
-                            iWeather.setCity(weatherResults.currentObservation.getDisplayLocation().getFull());
-                        }
-
 
                     }
                 });
+
     }
+    
 
     private void calculateTemp(float tempFahrenheit, float tempCelsius) {
         Log.v(TAG, "F" + tempFahrenheit + "C" + tempCelsius);
