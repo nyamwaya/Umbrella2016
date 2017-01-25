@@ -14,84 +14,39 @@ public class ForecastCondition {
     /**
      * Formatted time suitable for display
      */
-    private String displayTime;
+    public String displayTime;
 
     /**
      * Date representation of the time associated with this forecast
      */
-    private Date time;
+    public Date time;
 
     /**
      * The icon to use for this reading
      */
-    private String icon;
+    public String icon;
 
     /**
      * The human-readable name of the condition
      */
-    private String condition;
+    public String condition;
 
     /**
      * The temperature that is forecast (in degrees Fahrenheit)
      */
-    private float tempFahrenheit;
+    public float tempFahrenheit;
 
     /**
      * The temperature that is forecast (in degrees Celsius)
      */
-    private float tempCelsius;
-
-
-
+    public float tempCelsius;
     /**
-     * Getters and setters for proper encapsulation
+     * The current hour in 24 hour format
      */
 
-    public String getDisplayTime() {
-        return displayTime;
-    }
+    public int hour;
 
-    public void setDisplayTime(String displayTime) {
-        this.displayTime = displayTime;
-    }
+    public String day;
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public String getCondition() {
-        return condition;
-    }
-
-    public void setCondition(String condition) {
-        this.condition = condition;
-    }
-
-    public float getTempFahrenheit() {
-        return tempFahrenheit;
-    }
-
-    public void setTempFahrenheit(float tempFahrenheit) {
-        this.tempFahrenheit = tempFahrenheit;
-    }
-
-    public float getTempCelsius() {
-        return tempCelsius;
-    }
-
-    public void setTempCelsius(float tempCelsius) {
-        this.tempCelsius = tempCelsius;
-    }
+    public long yday;
 }
