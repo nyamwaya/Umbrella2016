@@ -24,8 +24,8 @@ public class WeatherResults {
     @SerializedName("hourly_forecast")
     public List<ForecastCondition> forecast;
 
-    public static Observable<WeatherResults> fetchWeather(String zipcode){
+    public static Observable<WeatherResults> fetchTenDayHourly(String zipcode){
         WeatherClient client = new WeatherClient();
-        return client.fetchWeather(zipcode);
+        return client.fetchTenDayHouly(zipcode);
     }
 }

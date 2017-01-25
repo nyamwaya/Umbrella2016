@@ -1,6 +1,9 @@
 package com.example.aleckson.umbrella.model;
 
+import com.example.aleckson.umbrella.network.WeatherClient;
 import com.google.gson.annotations.SerializedName;
+
+import rx.Observable;
 
 /**
  * Created by Aleckson on 12/23/2016.
@@ -63,5 +66,10 @@ public class CurrentObservation {
 
     public void setIcon(String icon) {
         this.icon = icon;
+    }
+
+    public static Observable<CurrentObservation> fetchCurrentObseervations(String zipcode){
+        WeatherClient client = new WeatherClient();
+        return client.fetchCurrentObservations(zipcode);
     }
 }
