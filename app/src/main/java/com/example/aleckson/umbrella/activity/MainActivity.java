@@ -21,7 +21,10 @@ import android.widget.TextView;
 import com.example.aleckson.umbrella.IWeather;
 import com.example.aleckson.umbrella.R;
 import com.example.aleckson.umbrella.model.CurrentObservation;
+import com.example.aleckson.umbrella.model.Day;
 import com.example.aleckson.umbrella.viewmodel.WeatherViewModel;
+
+import java.util.List;
 
 import rx.subscriptions.CompositeSubscription;
 
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements IWeather{
     private TextView mTemperature;
     private TextView mWeatheer;
     private Toolbar toolbar;
+
+
 
     private CollapsingToolbarLayout collapsingToolbar;
 
@@ -142,4 +147,15 @@ public class MainActivity extends AppCompatActivity implements IWeather{
         collapsingToolbar.setCollapsedTitleTextAppearance(R.style.collapsedToolBar);
         collapsingToolbar.setExpandedTitleTextAppearance(R.style.expandedToolBar);
     }
+
+    @Override
+    public void setHourlyConitions(List<Day> days, boolean metricMode) {
+        if (days != null) {
+           // setList(days, metricMode);
+        }else{
+            Log.v(TAG, "days list is null");
+        }
+    }
+
+
 }
