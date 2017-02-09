@@ -52,10 +52,22 @@ public class WeatherViewModel {
 
                     @Override
                     public void onNext(CurrentObservation currentObservation) {
+                        if (currentObservation != null) {
+                            Log.v(TAG, "Current conditions data fetched successfully");
+                            //Our data came back not null!!! yaya! now we must
+                            //pass the data to ites respective methods so we maintain single responsibility.
+                            // getHourlyCondition(weatherResults.forecast);
+                            calculateCurrentConditions(currentObservation);
+                            fetchTenDayHourly(mUserZipCode);
+                        }
 
                     }
                 });
 
+    }
+
+    private void calculateCurrentConditions(CurrentObservation currentObservation) {
+        
     }
 
     //Responsible for requesting 10 day hourly forecast
